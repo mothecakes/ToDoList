@@ -23,7 +23,9 @@ const queryUserTask = function() {
 
     let priority = prompt("Where do you want to place this task?");
 
-    return {title, description, date, priority};
+    let project = prompt("What project would this go to?");
+
+    return {title, description, date, priority, project};
 }
 
 export {queryUserTask};

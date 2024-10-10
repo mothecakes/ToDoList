@@ -1,31 +1,19 @@
 import { queryUserTask } from "./prompt";
+import { Task } from "./task";
 
-class Task {
-    title : string;
-    description : string;
-    date: string;
-    priority: number;
-    
-    constructor(title: string, description : string, date : string, priority: number) {
-        this.title = title;
-        this.description = description;
-        this.date = date;
-    }
-
-
-}
 
 class TaskManager {
-    taskList: Task[] = [];
+    projects: Task[][] = [[]];
     createTask = function() {
         const userInput = queryUserTask();
         const userTask = new Task(userInput.title, userInput.description, userInput.date, userInput.priority);
-        this.taskList.push(userTask);
+        const projectSelect : number = userInput.project;
+        this.projects[projectSelect].push(userTask);
         // TODO  implement priority shifting when splicing in object.
     }
 
     displayTasks = function() {
-        console.log(this.taskList);
+        console.log(this.projects);
     }
 }
 
