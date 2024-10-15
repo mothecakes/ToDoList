@@ -22,6 +22,14 @@ class Project {
         shift everything after by one
 
         */
+        if (task.priority < this.tasks.length) {
+            this.tasks.splice(task.priority, 0, task);
+        }
+        else{
+            this.tasks.push(task);
+            task.priority = this.tasks.length;
+        }
+        this.shiftPriority();
     }
 
     changePriority = function(task : Task, location: number) {
@@ -31,14 +39,22 @@ class Project {
         remove from list
         insert in new position
         shift everything after by one
-        
         */
+        this.tasks.splice(task.priority, 1);
+        task.priority = location;
+        this.tasks.splice(task.priority, 0, task);
+        this.shiftPriority();
     }
 
     shiftPriority = function() {
         /**
         after every change in prio, this should re check priorities and fix them
         */
+        let prioCount = 0;
+        this.tasks.array.forEach(function(element) {
+            element.priority = prioCount;
+            prioCount++;
+        });
     }
 }
 
